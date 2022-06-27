@@ -11,19 +11,35 @@
     <title>Code Quiz!</title>
 </head>
 <body>
-    <h1>Coding Quiz Challenge</h1><!--Cant get this to center. why?-->
-    <div class="container">
-        <div class="QandAtext">
+    <header><button class="button hide" id="highScoresButton">View High Scores</button><h1>Coding Quiz Challenge</h1></header>
+    <br>
+    <div class="container" id="question-container">
+        <div id="QandAText" class="hide">
             <div id="question">Question</div>
             <div id="answer-buttons" class="button-grid">
                 <button class="button" id="buttonA">A</button>
                 <button class="button" id="buttonB">B</button>
                 <button class="button" id="buttonC">C</button>
                 <button class="button" id="buttonD">D</button>
-                <button class="button" id="start-button">START</button>
+                
             </div>
         </div>
+        <div class="controls">
+            <button class="button" id="start-button">START</button>
+        </div>
     </div>
+
+    <br>
+    
+    <div class="container hide" id="countdownContainer"></div>
+
+    <br>
+
+    <div class="container hide" id="results"></div>
+
+    <br>
+
+    <div class="container hide" id="highScores"></div>
     
     <script src="./assets/script.js"></script>
 </body>
