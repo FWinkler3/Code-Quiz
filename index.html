@@ -11,16 +11,16 @@
     <title>Code Quiz!</title>
 </head>
 <body>
-    <header><button class="button hide" id="highScoresButton">View High Scores</button><h1>Coding Quiz Challenge</h1></header>
+    <header><button class="button hide" id="highScoresButton">View High Scores</button><div id="headline">Coding Quiz Challenge</div></header>
     <br>
     <div class="container" id="question-container">
         <div id="QandAText" class="hide">
             <div id="question">Question</div>
             <div id="answer-buttons" class="button-grid">
-                <button class="button" id="buttonA">A</button>
-                <button class="button" id="buttonB">B</button>
-                <button class="button" id="buttonC">C</button>
-                <button class="button" id="buttonD">D</button>
+                <button class="button" id="answerButtonA">A</button>
+                <button class="button" id="answerButtonB">B</button>
+                <button class="button" id="answerButtonC">C</button>
+                <button class="button" id="answerButtonD">D</button>
                 
             </div>
         </div>
@@ -35,13 +35,18 @@
 
     <br>
 
-    <div class="container hide" id="results"></div>
+    <div class="container hide" id="results">
+        
+    </div>
 
     <br>
 
-    <div class="container hide" id="highScores"></div>
+    <div class="container hide" id="highScores">
+        <input type="text" name="initials" placeholder="TYPE INITIALS HERE!"/>
+    </div>
     
     <script src="./assets/script.js"></script>
+    <script src="./assets/questions.js"></script>
 </body>
 
 </html>

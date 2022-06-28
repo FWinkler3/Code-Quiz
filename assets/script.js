@@ -1,11 +1,3 @@
-//need to define the following functions:
-  //startGame -  hide start button, starts timer, render first Question chosen from array (random or always in same order fine)
-  //nextQuestion - will render next question, brought on by clicking an answer button, must check if answer is correct, if incorrect, subtract time
-  //renderResults - will show number of correct answers, must input initials to log score, shows view high scores button
-  //viewHighScores - will show container of high scores from local storage
-  //timer function
-  //
-
 //variables to define
   //start button
 var startButton = document.getElementById("start-button");
@@ -21,24 +13,52 @@ var questionContainer = document.getElementById("question-container");
 var choices = document.getElementById("answer-buttons"); 
   // results for user after taking quiz
 var results = document.getElementById("results");
+  //list of high scores 
+var highScores = document.getElementById("highScores");
+  //starting time
+var timeLeft = 75; //15 seconds per question, 5 questions (CHANGE BACK TO 75!!!)
+  //used to change question being rendered
+var question = document.getElementById("question");
+  // Answer Button variables
+var answerButtonA = document.getElementById("answerButtonA"); 
+var answerButtonB = document.getElementById("answerButtonB"); 
+var answerButtonC = document.getElementById("answerButtonC"); 
+var answerButtonD = document.getElementById("answerButtonD"); 
+//displays originally as coding quiz challenge and then will return correct or incorrect results from previous question
+var headline = document.getElementById("headline");
 
-//Clicking the Start Button will kick off the entire quiz
-startButton.addEventListener ("click", startQuiz); 
+// creating manual for loop
+var currentIndex = 0
+var timeInterval;
 
-//startQuiz function will need to be defined
-function startQuiz () {
-  startButton.classList.add("hide");
-  //console.log("Started");
-  questionBeingAsked.classList.remove("hide"); 
-  timerEl.classList.remove("hide");
-  countdown(); 
-}
+  // variable bank of questions
+  var questionBank = [
+    {
+      title: "Commonly used data types DO NOT include:",
+      choices: ["a. strings", "b. booleans", "c. alerts", "d. numbers"],
+      answer: "c. alerts"
+    },
+    {
+      title: "Arrays in JavaScript can be used to store: ",
+      choices: ["a. numbers", "b. letters", "c. booleans", "d. All of the Above"],
+      answer: "d. All of the Above"
+    },
+    {
+      title: "A very useful tool in debugging during development is:",
+      choices: ["a. Raid spray", "b. A screwdriver", "c. console.log", "d. Smashing the Keyboard"],
+      answer: "c. console.log"
+    },
+    {
+      title: "The first index of an array is ___.",
+      choices: ["a. The Premier", "b. 0", "c. 1", "d. None of the Above"],
+      answer: "b. 0"
+    }
+  ]
 
-//this is the countdown function which will also need to be called when startQuiz is called 
+//timer function (to be called when startQuiz is called)
 function countdown() {
-  var timeLeft = 5; //15 seconds per question, 5 questions (CHANGE BACK TO 75!!!)
 
-  var timeInterval = setInterval(function () {
+  timeInterval = setInterval(function () {
     if (timeLeft > 1) {
       timerEl.textContent = timeLeft + ' seconds remaining';
       timeLeft--;
@@ -53,31 +73,97 @@ function countdown() {
   }, 1000);
 }
 
+//Clicking the Start Button will initiate the quiz
+startButton.addEventListener ("click", startQuiz); 
+
+//startQuiz function - hide start button, starts timer, render first Question chosen from array
+function startQuiz () {
+  startButton.classList.add("hide");
+  //console.log("Started");
+  questionBeingAsked.classList.remove("hide"); 
+  timerEl.classList.remove("hide");
+  headline.textContent="";
+  countdown(); 
+  renderQuestion(currentIndex);
+}
+
+//RENDER QUESTION FRAMEWORK
+  // question on HTML becomes question in Array chosen by title
+  // answer buttons on HTML become choices in Array.
+function renderQuestion (i) {
+
+  question.textContent = questionBank[i].title; 
+  answerButtonA.textContent = questionBank[i].choices[0];
+  answerButtonB.textContent = questionBank[i].choices[1];
+  answerButtonC.textContent = questionBank[i].choices[2];
+  answerButtonD.textContent = questionBank[i].choices[3];
+}; 
+
+//now we need a function to check answer
+function checkAnswer (usersInput) {
+  console.log(usersInput)
+  if (questionBank[currentIndex].answer === usersInput) {
+    console.log('correct')
+  headline.textContent="CORRECT!";
+  timeLeft+=10;
+  }else{
+    console.log('wrong')
+    headline.textContent="INCORRECT!";
+    timeLeft-=15;
+  }
+// if currentIndex is = to questions.length then endQuiz
+currentIndex++
+if (currentIndex === questionBank.length) {
+  clearInterval(timeInterval);
+  displayFinalScore();
+}else{
+  // After we decided whether usersInput was correct or not correct, increase the current index variable by 1 and render questions with new current index
+    renderQuestion(currentIndex);
+
+  }
+
+}
+
+answerButtonA.addEventListener("click", function () {
+  checkAnswer(answerButtonA.textContent)
+});
+answerButtonB.addEventListener("click", function () {
+  checkAnswer(answerButtonB.textContent)
+});
+answerButtonC.addEventListener("click", function () {
+  checkAnswer(answerButtonC.textContent)
+});
+answerButtonD.addEventListener("click", function () {
+  checkAnswer(answerButtonD.textContent)
+});
+
+
+//nextQuestion - will render next question, brought on by clicking an answer button, must check if answer is correct, if incorrect, subtract time
+
+//renderResults - will show time left, must input initials to log score, shows view high scores button
+//viewHighScores - will show container of high scores from local storage
+
 //this is the function that will display the results
-//why is there a split second pause in between questions appearing and timer starting. is this an issue?
+
+
 //FUNCTION IS NOT FINISHED. 
 function displayFinalScore () {
   timerEl.textContent = "Times up!";
   questionContainer.classList.add("hide"); 
   highScoreButton.classList.remove("hide");
   results.classList.remove("hide");
-  var count = 5;
-  results.textContent = ""
+  results.textContent = "";
 
-  if (count === 5) {
-    results.textContent = "Congratulations! \ You got all 5 correct! \ You're a coding master!"
+  //if (timeLeft === 0) {
+    results.textContent = " Your Score: " + timeLeft
   }
-  else {
-    results.textContent = "You got"
-  }
-
-}
+  
+//}
 
 
 //need to add event listener so when any answer button is clicked, moves on to next question
 //choices.addEventListener("click", nextQuestion()); ***REMOVE COMMENT NOTATION WHEN nextQuestion is defined!!!
 
-//now need to define function of next question... method random question. 
 
 //function nextQuestion() {}
 

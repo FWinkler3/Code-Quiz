@@ -13,9 +13,11 @@ SO THAT I can gauge my progress compared to my peers
 
 
 ## Link to Deployed Application
-
+GitHub : INSERT LINK HERE!
 
 ## Contact Info 
 Frank Winkler III
+<br>
 GitHub : https://github.com/FWinkler3 
+<br>
 Email: frank.w.winkler@gmail.com 
