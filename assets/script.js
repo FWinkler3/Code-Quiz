@@ -140,6 +140,7 @@ answerButtonD.addEventListener("click", function () {
 //this is the function that will display the results
 
 function displayFinalScore () {
+  headline.textContent="";
   timerEl.textContent = "All done!";
   questionContainer.classList.add("hide"); 
   highScoreButton.classList.remove("hide");
@@ -149,6 +150,8 @@ function displayFinalScore () {
   highScores.classList.remove("hide");
 }
 
+
+//STORE HIGH SCORE FUNCTION / VIEW HIGH SCORES FUNCTION INCOMPLETE
 //viewHighScores - will show container of high scores from local storage
 
 //need to figure out how initials is defined
