@@ -83,6 +83,11 @@ body {
     font-weight: bolder;
     font-size: xx-large;
     background-color: aquamarine;
-    color: black;
-    
+    color: black;   
+}
+
+#highScores {
+    font-size: x-large;
+    background-color: white;
+    color: black; 
 }

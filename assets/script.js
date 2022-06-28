@@ -16,7 +16,7 @@ var results = document.getElementById("results");
   //list of high scores 
 var highScores = document.getElementById("highScores");
   //starting time
-var timeLeft = 75; //15 seconds per question, 5 questions (CHANGE BACK TO 75!!!)
+var timeLeft = 60; //15 seconds per question, 4 questions
   //used to change question being rendered
 var question = document.getElementById("question");
   // Answer Button variables
@@ -39,7 +39,7 @@ var timeInterval;
       answer: "c. alerts"
     },
     {
-      title: "Arrays in JavaScript can be used to store: ",
+      title: "Arrays in JavaScript can be used to store:",
       choices: ["a. numbers", "b. letters", "c. booleans", "d. All of the Above"],
       answer: "d. All of the Above"
     },
@@ -67,6 +67,7 @@ function countdown() {
       timeLeft--;
     } else {
       timerEl.textContent = '';
+      timerEl.textContent = "Times Up!"
       clearInterval(timeInterval);
       displayFinalScore(); 
     }
@@ -103,11 +104,11 @@ function renderQuestion (i) {
 function checkAnswer (usersInput) {
   console.log(usersInput)
   if (questionBank[currentIndex].answer === usersInput) {
-    console.log('correct')
+    //console.log('correct')
   headline.textContent="CORRECT!";
-  timeLeft+=10;
+  timeLeft+=5;
   }else{
-    console.log('wrong')
+    //console.log('incorrect')
     headline.textContent="INCORRECT!";
     timeLeft-=15;
   }
@@ -119,9 +120,7 @@ if (currentIndex === questionBank.length) {
 }else{
   // After we decided whether usersInput was correct or not correct, increase the current index variable by 1 and render questions with new current index
     renderQuestion(currentIndex);
-
   }
-
 }
 
 answerButtonA.addEventListener("click", function () {
@@ -138,32 +137,27 @@ answerButtonD.addEventListener("click", function () {
 });
 
 
-//nextQuestion - will render next question, brought on by clicking an answer button, must check if answer is correct, if incorrect, subtract time
-
-//renderResults - will show time left, must input initials to log score, shows view high scores button
-//viewHighScores - will show container of high scores from local storage
-
 //this is the function that will display the results
 
-
-//FUNCTION IS NOT FINISHED. 
 function displayFinalScore () {
-  timerEl.textContent = "Times up!";
+  timerEl.textContent = "All done!";
   questionContainer.classList.add("hide"); 
   highScoreButton.classList.remove("hide");
   results.classList.remove("hide");
   results.textContent = "";
+    results.textContent = " Your Score: " + timeLeft;
+  highScores.classList.remove("hide");
+}
 
-  //if (timeLeft === 0) {
-    results.textContent = " Your Score: " + timeLeft
-  }
-  
+//viewHighScores - will show container of high scores from local storage
+
+//need to figure out how initials is defined
+//var initials = document.getElementById(initials)
+//var userScore = {
+  //initials: 
+  //score: timeLeft.textContent;
 //}
 
-
-//need to add event listener so when any answer button is clicked, moves on to next question
-//choices.addEventListener("click", nextQuestion()); ***REMOVE COMMENT NOTATION WHEN nextQuestion is defined!!!
-
-
-//function nextQuestion() {}
-
+//function setScore {
+  //localStorage.setItem(userScore)
+//}
